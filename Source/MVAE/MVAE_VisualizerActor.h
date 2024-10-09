@@ -37,4 +37,6 @@ public:
 
 
 		TArray<float> HistoryCondInputData;
+		float rootYaw = 0;
+		FVector CurrentRootPos;
 };

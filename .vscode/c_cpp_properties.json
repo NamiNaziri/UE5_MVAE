@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "clang-x64",
+            "compileCommands": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_Default.json",
+            "includePath": [ 
+                "${workspaceFolder}/Intermediate/**", 
+                "${workspaceFolder}/Plugins/**", 
+                "${workspaceFolder}/Source/**" 
+            ],
+        }
+        
+    ],
+    "version": 4,
+
+}

@@ -77,5 +77,10 @@ public:
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<class UNNEModelData> PreLoadedModelData;
 
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FVector> GoalPositions;
+	TArray<float> HistoryCondInputData;
+	float rootYaw = 0;
+	FVector CurrentRootPos;
 };
 

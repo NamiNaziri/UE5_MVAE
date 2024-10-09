@@ -1,0 +1,869 @@
+{
+	"folders": [
+		{
+			"name": "MVAE",
+			"path": "."
+		},
+		{
+			"name": "UE5",
+			"path": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off",
+		"npm.autoDetect": "off",
+		"files.associations": {
+			"random": "cpp",
+			"algorithm": "cpp"
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "MVAE Linux Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE Linux Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE Linux DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE Linux Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Test Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Test",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Test Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Test",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE Linux Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Test Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Test",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Shipping Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Shipping",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Shipping Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Shipping",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE Linux Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE Linux Shipping Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"Linux",
+					"Shipping",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE LinuxArm64 Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE LinuxArm64 DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE LinuxArm64 Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Test Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Test",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Test Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Test",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE LinuxArm64 Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Test Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Test",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Shipping Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Shipping",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Shipping Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Shipping",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAE LinuxArm64 Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAE LinuxArm64 Shipping Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAE",
+					"LinuxArm64",
+					"Shipping",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAEEditor Linux Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"Debug",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAEEditor Linux DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"DebugGame",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"MVAEEditor Linux Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			},
+			{
+				"label": "MVAEEditor Linux Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"MVAEEditor",
+					"Linux",
+					"Development",
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+				}
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch MVAE (Debug)",
+				"request": "launch",
+				"program": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Binaries/Linux/UnrealGame-Linux-Debug",
+				"preLaunchTask": "MVAE Linux Debug Build",
+				"args": [
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAE (DebugGame)",
+				"request": "launch",
+				"program": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Binaries/Linux/UnrealGame-Linux-DebugGame",
+				"preLaunchTask": "MVAE Linux DebugGame Build",
+				"args": [
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAE (Development)",
+				"request": "launch",
+				"program": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Binaries/Linux/UnrealGame",
+				"preLaunchTask": "MVAE Linux Development Build",
+				"args": [
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAE (Test)",
+				"request": "launch",
+				"program": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Binaries/Linux/UnrealGame-Linux-Test",
+				"preLaunchTask": "MVAE Linux Test Build",
+				"args": [
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAE (Shipping)",
+				"request": "launch",
+				"program": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Binaries/Linux/UnrealGame-Linux-Shipping",
+				"preLaunchTask": "MVAE Linux Shipping Build",
+				"args": [
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAEEditor (Debug)",
+				"request": "launch",
+				"program": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor-Linux-Debug",
+				"preLaunchTask": "MVAEEditor Linux Debug Build",
+				"args": [
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject"
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAEEditor (DebugGame)",
+				"request": "launch",
+				"program": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
+				"preLaunchTask": "MVAEEditor Linux DebugGame Build",
+				"args": [
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject"
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Launch MVAEEditor (Development)",
+				"request": "launch",
+				"program": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Binaries/Linux/UnrealEditor",
+				"preLaunchTask": "MVAEEditor Linux Development Build",
+				"args": [
+					"/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject"
+				],
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4",
+				"type": "cppdbg",
+				"visualizerFile": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
+			},
+			{
+				"name": "Generate Project Files",
+				"type": "coreclr",
+				"request": "launch",
+				"preLaunchTask": "UnrealBuildTool Linux Development Build",
+				"program": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Build/BatchFiles/RunUBT.bat",
+				"args": [
+					"-projectfiles",
+					"-vscode",
+					"-project=/home/aram/Desktop/U5_MVAE/UE5_MVAE/MVAE.uproject",
+					"-game",
+					"-engine",
+					"-dotnet"
+				],
+				"console": "internalConsole",
+				"internalConsoleOptions": "openOnSessionStart",
+				"stopAtEntry": false,
+				"cwd": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4"
+			}
+		]
+	}
+}

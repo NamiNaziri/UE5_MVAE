@@ -1,0 +1,74 @@
+[
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAE.Build.cs",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAE.cpp",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAE.h",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAECharacter.cpp",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAECharacter.h",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAEGameMode.cpp",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAEGameMode.h",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAE_VisualizerActor.cpp",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	},
+	{
+		"file": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/Source/MVAE/MVAE_VisualizerActor.h",
+		"arguments": [
+			"/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE/MVAE.1.rsp"
+		],
+		"directory": "/home/aram/Downloads/Linux_Unreal_Engine_5.4.4/Engine/Source"
+	}
+]

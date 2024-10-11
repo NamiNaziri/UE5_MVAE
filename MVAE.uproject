@@ -8,10 +8,12 @@
 			"Name": "MVAE",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine"
-			]
-		}
+		},
+       {
+          "Name": "MVAEEditor",
+          "Type": "Editor",
+          "LoadingPhase": "Default"
+       }
 	],
 	"Plugins": [
 		{

@@ -4,16 +4,23 @@
             "name": "Linux",
             "cStandard": "c17",
             "cppStandard": "c++20",
-            "intelliSenseMode": "clang-x64",
-            "compileCommands": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_Default.json",
-            "includePath": [ 
-                "${workspaceFolder}/Intermediate/**", 
-                "${workspaceFolder}/Plugins/**", 
-                "${workspaceFolder}/Source/**" 
+            "intelliSenseMode": "msvc-x64", 
+            "compileCommands": "/home/aram/Desktop/U5_MVAE/UE5_MVAE/.vscode/compileCommands_MVAE.json",
+            "includePath": [
+                "${workspaceFolder}/Intermediate/**",
+                "${workspaceFolder}/Source/**"
             ],
+            "defines": [ 
+                "UNICODE", 
+                "_UNICODE", 
+                "__UNREAL__", 
+                "UBT_COMPILED_PLATFORM=Windows", 
+                "WITH_ENGINE=1", 
+                "WITH_UNREAL_DEVELOPER_TOOLS=1", 
+                "WITH_APPLICATION_CORE=1", 
+                "WITH_COREUOBJECT=1" 
+            ] 
         }
-        
     ],
-    "version": 4,
-
+    "version": 4
 }

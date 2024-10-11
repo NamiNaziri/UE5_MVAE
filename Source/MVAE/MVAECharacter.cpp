@@ -74,6 +74,17 @@ void AMVAECharacter::BeginPlay()
 		}
 	}
 
+        for (int32 i = 0; i < 24; i++)
+    {
+        AActor* SphereActor = GetWorld()->SpawnActor<AActor>(ActorToSpawn);
+        SphereActors.Add(SphereActor);
+
+        float XOffset = (i % 5) * 100.0f; // 5 spheres in each row
+        float YOffset = (i / 5) * 100.0f; // 4 rows in total
+        SphereActor->SetActorLocation(FVector(XOffset, YOffset, 0.0f));
+    }
+    
+
 
     FTimerHandle TimerHandle;
     GetWorldTimerManager().SetTimer(
@@ -129,13 +140,14 @@ void AMVAECharacter::BeginPlay()
                             UE_LOG(LogTemp,Warning,TEXT("init"));
                             HistoryCondInputData.SetNumZeroed(InputTensorShapes[1].Volume());
 							GoalPositions.SetNumZeroed(24);
+                            GoalRotations.SetNumZeroed(24);
 
                         }
 
-                        for (int32 b = 0; b < 1; b++)
-                        {
-                            UE_LOG(LogClass, Log, TEXT("Names: %f"), ZInputData[b]); 
-                        }
+                        // for (int32 b = 0; b < 1; b++)
+                        // {
+                        //     UE_LOG(LogClass, Log, TEXT("Names: %f"), ZInputData[b]); 
+                        // }
                         InputBindings[1].Data = HistoryCondInputData.GetData();
                         InputBindings[1].SizeInBytes = HistoryCondInputData.Num() * sizeof(float);
 
@@ -148,28 +160,51 @@ void AMVAECharacter::BeginPlay()
 
 						//history for the next frame
                         HistoryCondInputData = (OutputData);
+                        //rootYaw += OutputData[2] * 0.03333333333;
+                        
+
+                        rootYaw = GetActorRotation().Yaw - 45;
                         rootYaw += OutputData[2] * 0.03333333333;
+
+                        FRotator CurrentRotation = GetActorRotation();
+                        CurrentRotation.Yaw = CurrentRotation.Yaw + FMath::DegreesToRadians(OutputData[2] * 0.03333333333);
+                        SetActorRotation(CurrentRotation);
+                        UE_LOG(LogClass, Log, TEXT("Names: %f"), rootYaw); 
                         FVector Speed(OutputData[0],OutputData[1] ,0);
                         Speed = Speed.RotateAngleAxis(FMath::RadiansToDegrees(rootYaw), FVector(0, 0, 1));
-                        CurrentRootPos.X += Speed[0] * 0.03333333333 ;
-                        CurrentRootPos.Y += Speed[1] * 0.03333333333 ;
+                        FVector ActorLocation = GetActorLocation();
+
+                        ActorLocation.X += Speed[0] * 0.03333333333 * 100;
+                        ActorLocation.Y += Speed[1] * 0.03333333333 * 100;
+                        SetActorLocation(ActorLocation);
+                        ActorLocation.Z = 0;
                         for (int i = 141; i < 213; i += 3)
                         {
                             FVector NewLocation(OutputData[i] , OutputData[i + 1] , OutputData[i + 2]);
-                            FTransform BodyTransform = FTransform();
-                            BodyTransform.SetLocation(NewLocation);
-                            FRotator RootRotation(0.f,0.f,rootYaw);
+                            NewLocation = NewLocation.RotateAngleAxis(FMath::RadiansToDegrees(rootYaw), FVector(0, 0, 1));
 
-                            FTransform YawTransform = FTransform();
-                            YawTransform.SetRotation(RootRotation.Quaternion());
-                            FTransform TransformedBodyPose = YawTransform * BodyTransform;
+                            // FTransform BodyTransform = FTransform();
+                            // BodyTransform.SetLocation(NewLocation);
+                            // FRotator RootRotation(0.f,0.f,rootYaw);
+
+                            // FTransform YawTransform = FTransform();
+                            // YawTransform.SetRotation(RootRotation.Quaternion());
+                            // FTransform TransformedBodyPose = YawTransform * BodyTransform;
 
 
-                            NewLocation = TransformedBodyPose.GetLocation();//NewLocation.RotateAngleAxis(rootYaw, FVector(0, 0, 1));
-                            NewLocation.X += CurrentRootPos.X;
-                             NewLocation.Y += CurrentRootPos.Y;
-                            GoalPositions[int32((i - 141) / 3)] = NewLocation * 100;
+                            // NewLocation = TransformedBodyPose.GetLocation();//NewLocation.RotateAngleAxis(rootYaw, FVector(0, 0, 1));
+                            // NewLocation.X += CurrentRootPos.X;
+                            // NewLocation.Y += CurrentRootPos.Y;
+                            GoalPositions[int32((i - 141) / 3)] = ActorLocation + (NewLocation * 110);
+                            SphereActors[int32((i - 141) / 3)]->SetActorLocation(ActorLocation + (NewLocation * 110), false);
 
+                        }
+
+                        for (int i = 3; i < 72; i += 3)
+                        {
+                            FRotator NewRotation(FMath::RadiansToDegrees(OutputData[i + 2]) ,FMath::RadiansToDegrees(OutputData[i + 1]) , FMath::RadiansToDegrees(OutputData[i]));
+                            //UE_LOG(LogClass, Log, TEXT("Names: %f"), FMath::RadiansToDegrees(OutputData[i + 2])); 
+                            GoalRotations[int32((i-3) / 3) + 1] = NewRotation;
                         }
                     }
                     else

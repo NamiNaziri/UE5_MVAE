@@ -74,11 +74,21 @@ public:
 
 
 public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TArray<AActor*> SphereActors;
+
+	UPROPERTY(EditDefaultsOnly)
+		TSubclassOf<AActor> ActorToSpawn;
+		
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<class UNNEModelData> PreLoadedModelData;
 
 	UPROPERTY(BlueprintReadWrite)
 	TArray<FVector> GoalPositions;
+
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FRotator> GoalRotations;
+
 	TArray<float> HistoryCondInputData;
 	float rootYaw = 0;
 	FVector CurrentRootPos;

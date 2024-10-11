@@ -7,13 +7,13 @@
 		{
 			"Name": "MVAE",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
+			"LoadingPhase": "Default"
 		},
-       {
-          "Name": "MVAEEditor",
-          "Type": "Editor",
-          "LoadingPhase": "Default"
-       }
+		{
+			"Name": "MVAEEditor",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
 	],
 	"Plugins": [
 		{

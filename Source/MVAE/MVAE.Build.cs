@@ -8,7 +8,7 @@ public class MVAE : ModuleRules
 	{
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","NNE",});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","NNE", "AnimGraphRuntime" });
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 	}
 }

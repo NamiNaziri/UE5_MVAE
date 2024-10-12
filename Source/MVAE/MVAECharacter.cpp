@@ -169,6 +169,11 @@ void AMVAECharacter::BeginPlay()
                         FRotator CurrentRotation = GetActorRotation();
                         CurrentRotation.Yaw = CurrentRotation.Yaw + FMath::DegreesToRadians(OutputData[2] * 0.03333333333);
                         SetActorRotation(CurrentRotation);
+                        GoalRotations[0] = CurrentRotation;
+                        GoalRotations[0].Yaw = rootYaw;
+                        GoalRotations[0].Pitch = 0;
+                        GoalRotations[0].Roll = 0;
+
                         UE_LOG(LogClass, Log, TEXT("Names: %f"), rootYaw); 
                         FVector Speed(OutputData[0],OutputData[1] ,0);
                         Speed = Speed.RotateAngleAxis(FMath::RadiansToDegrees(rootYaw), FVector(0, 0, 1));
@@ -202,7 +207,8 @@ void AMVAECharacter::BeginPlay()
 
                         for (int i = 3; i < 72; i += 3)
                         {
-                            FRotator NewRotation(FMath::RadiansToDegrees(OutputData[i + 2]) ,FMath::RadiansToDegrees(OutputData[i + 1]) , FMath::RadiansToDegrees(OutputData[i]));
+                            //FRotator NewRotation(FMath::RadiansToDegrees(OutputData[i ]) ,FMath::RadiansToDegrees(OutputData[i + 1])   , FMath::RadiansToDegrees(OutputData[i + 2]));
+                            FRotator NewRotation(FMath::RadiansToDegrees(OutputData[i+1]), FMath::RadiansToDegrees(OutputData[i]), FMath::RadiansToDegrees(OutputData[i+2]));
                             //UE_LOG(LogClass, Log, TEXT("Names: %f"), FMath::RadiansToDegrees(OutputData[i + 2])); 
                             GoalRotations[int32((i-3) / 3) + 1] = NewRotation;
                         }

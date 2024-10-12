@@ -5,10 +5,22 @@
 #include "CoreMinimal.h"
 #include "UObject/ObjectMacros.h"
 #include "BonePose.h"
+#include "Runtime/AnimGraphRuntime/Public/BoneControllers/AnimNode_SkeletalControlBase.h"
 #include "AnimNode_MVAE_Retargeter.generated.h"
 /**
  * 
  */
+
+USTRUCT(BlueprintType)
+struct FBonesRotations
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoneRotations")
+	TArray<FRotator> NewLocalRotations;
+};
+
+
 USTRUCT(BlueprintType)
 
 struct MVAE_API FAnimNode_MVAE_Retargeter: public FAnimNode_Base
@@ -17,32 +29,19 @@ struct MVAE_API FAnimNode_MVAE_Retargeter: public FAnimNode_Base
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Links)
-	FPoseLink BasePose; 
-	
-    virtual void Initialize_AnyThread(const FAnimationInitializeContext& Context) override;
-    virtual void CacheBones_AnyThread(const FAnimationCacheBonesContext& Context)  override;
-    virtual void Update_AnyThread(const FAnimationUpdateContext& Context) override;
-	virtual void Evaluate_AnyThread(FPoseContext& Output) override;
+	FPoseLink BasePose;
+	 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = SkeletalControl, meta = (PinShownByDefault))
+	TArray<FRotator> NewLocalRotations;
 
-	virtual void GatherDebugData(FNodeDebugData& DebugData)override{} 
+	//virtual void EvaluateSkeletalControl_AnyThread(FComponentSpacePoseContext& Output, TArray<FBoneTransform>& OutBoneTransforms) override;
+	virtual void Evaluate_AnyThread(FPoseContext& Output);
+	//virtual void InitializeBoneReferences(const FBoneContainer& RequiredBones) override;
+
+	virtual void GatherDebugData(FNodeDebugData& DebugData)override{}
+
+private:
+
+
 };
-
-inline void FAnimNode_MVAE_Retargeter::Initialize_AnyThread(const FAnimationInitializeContext& Context)
-{
-	FAnimNode_Base::Initialize_AnyThread(Context);
-}
-
-inline void FAnimNode_MVAE_Retargeter::CacheBones_AnyThread(const FAnimationCacheBonesContext& Context)
-{
-	FAnimNode_Base::CacheBones_AnyThread(Context);
-}
-
-inline void FAnimNode_MVAE_Retargeter::Update_AnyThread(const FAnimationUpdateContext& Context)
-{
-	FAnimNode_Base::Update_AnyThread(Context);
-}
-
-inline void FAnimNode_MVAE_Retargeter::Evaluate_AnyThread(FPoseContext& Output)
-{
-	FAnimNode_Base::Evaluate_AnyThread(Output);
-}
+  

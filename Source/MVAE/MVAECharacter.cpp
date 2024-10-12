@@ -106,9 +106,11 @@ void AMVAECharacter::BeginPlay()
 
                         UE::NNE::FSymbolicTensorShape SymbolicInputTensorShape = InputTensorDescs[0].GetShape();
                         UE::NNE::FSymbolicTensorShape SymbolicInputTensorShape1 = InputTensorDescs[1].GetShape();
-                        checkf(SymbolicInputTensorShape.IsConcrete(), TEXT("The current example supports only models without variable input tensor dimensions"));
+                        //checkf(SymbolicInputTensorShape.IsConcrete(), TEXT("The current example supports only models without variable input tensor dimensions"));
                         TArray<UE::NNE::FTensorShape> InputTensorShapes = { UE::NNE::FTensorShape::MakeFromSymbolic(SymbolicInputTensorShape),
-                        UE::NNE::FTensorShape::MakeFromSymbolic(SymbolicInputTensorShape1) };
+							UE::NNE::FTensorShape::MakeFromSymbolic(SymbolicInputTensorShape1),
+	                        UE::NNE::FTensorShape::MakeFromSymbolic(InputTensorDescs[2].GetShape())
+                        };
 
                         ModelInstance->SetInputTensorShapes(InputTensorShapes);
 
@@ -119,7 +121,7 @@ void AMVAECharacter::BeginPlay()
                         TArray<UE::NNE::FTensorShape> OutputTensorShapes = { UE::NNE::FTensorShape::MakeFromSymbolic(SymbolicOutputTensorShape) };
 
                         TArray<float> ZInputData;
-                        TArray<float> CondInputData;
+
                         TArray<float> OutputData;
                         TArray<UE::NNE::FTensorBindingCPU> InputBindings;
                         TArray<UE::NNE::FTensorBindingCPU> OutputBindings;
@@ -132,7 +134,8 @@ void AMVAECharacter::BeginPlay()
                             std::normal_distribution<float> d{ 0.f, 1.0f };
                             value =d(gen);
                         }
-                        InputBindings.SetNum(2);
+
+                        InputBindings.SetNum(3);
                         InputBindings[0].Data = ZInputData.GetData();
                         InputBindings[0].SizeInBytes = ZInputData.Num() * sizeof(float);
                         if(HistoryCondInputData.Num() == 0)
@@ -142,6 +145,17 @@ void AMVAECharacter::BeginPlay()
 							GoalPositions.SetNumZeroed(24);
                             GoalRotations.SetNumZeroed(24);
 
+                            RootFullInputData.SetNumZeroed(InputTensorShapes[2].Volume());
+                            FQuat InitRootRotation = FQuat(GetActorRotation());
+                            RootFullInputData[0] = InitRootRotation.X;
+                            RootFullInputData[1] = InitRootRotation.Y;
+                            RootFullInputData[2] = InitRootRotation.Z;
+                            RootFullInputData[3] = InitRootRotation.W;
+
+                        	FVector InitRootPosition = GetActorLocation();
+                            RootFullInputData[4] = InitRootPosition.X;
+                            RootFullInputData[5] = InitRootPosition.Y;
+                            RootFullInputData[6] = InitRootPosition.Z;
                         }
 
                         // for (int32 b = 0; b < 1; b++)
@@ -151,6 +165,10 @@ void AMVAECharacter::BeginPlay()
                         InputBindings[1].Data = HistoryCondInputData.GetData();
                         InputBindings[1].SizeInBytes = HistoryCondInputData.Num() * sizeof(float);
 
+                        InputBindings[2].Data = RootFullInputData.GetData();
+                        InputBindings[2].SizeInBytes = RootFullInputData.Num() * sizeof(float);
+
+
                         OutputData.SetNumZeroed(OutputTensorShapes[0].Volume());
                         OutputBindings.SetNumZeroed(1);
                         OutputBindings[0].Data = OutputData.GetData();
@@ -159,10 +177,47 @@ void AMVAECharacter::BeginPlay()
                         ModelInstance->RunSync(InputBindings, OutputBindings);
 
 						//history for the next frame
-                        HistoryCondInputData = (OutputData);
-                        //rootYaw += OutputData[2] * 0.03333333333;
+                        for(int i =0 ; i< 213; i++)
+                        {
+                            HistoryCondInputData[i] = OutputData[i];
+                        }
                         
+                        //rootYaw += OutputData[2] * 0.03333333333;
 
+                        for (int i = 213; i < 213 + 72; i += 3)
+                        {
+                            FVector NewLocation(OutputData[i], OutputData[i + 1], OutputData[i + 2]);
+                            if(i==213)
+                            {
+                                //SetActorLocation(NewLocation);
+                                RootFullInputData[4] = OutputData[i];
+                                RootFullInputData[5] = OutputData[i + 1];
+                                RootFullInputData[6] = OutputData[i + 2];
+
+                            }
+
+                            GoalPositions[int32((i - 213) / 3)] = (NewLocation * 110);
+                            SphereActors[int32((i - 213) / 3)]->SetActorLocation((NewLocation * 110), false);
+
+                        }
+
+
+                        for (int i = 285; i < 285 + 96; i += 4)
+                        {
+                            FQuat NewRotation(OutputData[i], OutputData[i + 1], OutputData[i + 2], OutputData[i + 3]);
+
+                            if (i == 285)
+                            {
+                                //SetActorRotation(NewRotation.Rotator());
+                                RootFullInputData[0] = OutputData[i];
+                                RootFullInputData[1] = OutputData[i+1];
+                                RootFullInputData[2] = OutputData[i+2];
+                                RootFullInputData[3] = OutputData[i+3];
+                            }
+
+                            GoalRotations[(i - 285) / 4] = NewRotation;
+                        }
+                        /*
                         rootYaw = GetActorRotation().Yaw - 45;
                         rootYaw += OutputData[2] * 0.03333333333;
 
@@ -174,7 +229,7 @@ void AMVAECharacter::BeginPlay()
                         GoalRotations[0].Pitch = 0;
                         GoalRotations[0].Roll = 0;
 
-                        UE_LOG(LogClass, Log, TEXT("Names: %f"), rootYaw); 
+                        //UE_LOG(LogClass, Warning, TEXT("Names: %f"), rootYaw); 
                         FVector Speed(OutputData[0],OutputData[1] ,0);
                         Speed = Speed.RotateAngleAxis(FMath::RadiansToDegrees(rootYaw), FVector(0, 0, 1));
                         FVector ActorLocation = GetActorLocation();
@@ -212,6 +267,7 @@ void AMVAECharacter::BeginPlay()
                             //UE_LOG(LogClass, Log, TEXT("Names: %f"), FMath::RadiansToDegrees(OutputData[i + 2])); 
                             GoalRotations[int32((i-3) / 3) + 1] = NewRotation;
                         }
+                        */
                     }
                     else
                     {

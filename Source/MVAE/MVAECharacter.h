@@ -87,9 +87,12 @@ public:
 	TArray<FVector> GoalPositions;
 
 	UPROPERTY(BlueprintReadWrite)
-	TArray<FRotator> GoalRotations;
+	TArray<FQuat> GoalRotations;
 
 	TArray<float> HistoryCondInputData;
+	TArray<float> RootFullInputData;
+	
+
 	float rootYaw = 0;
 	FVector CurrentRootPos;
 };

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/PoseableMeshComponent.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 
@@ -17,7 +18,7 @@ struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
-UCLASS(config=Game)
+UCLASS(config = Game)
 class AMVAECharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -29,7 +30,7 @@ class AMVAECharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FollowCamera;
-	
+
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
@@ -47,8 +48,8 @@ class AMVAECharacter : public ACharacter
 	UInputAction* LookAction;
 
 public:
-	AMVAECharacter();
-	
+	AMVAECharacter(const FObjectInitializer& ObjectInitializer);
+
 
 protected:
 
@@ -57,12 +58,12 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
+
 
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
 	// To add mapping context
 	virtual void BeginPlay();
 
@@ -78,8 +79,8 @@ public:
 	TArray<AActor*> SphereActors;
 
 	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<AActor> ActorToSpawn;
-		
+	TSubclassOf<AActor> ActorToSpawn;
+
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<class UNNEModelData> PreLoadedModelData;
 
@@ -87,13 +88,10 @@ public:
 	TArray<FVector> GoalPositions;
 
 	UPROPERTY(BlueprintReadWrite)
-	TArray<FQuat> GoalRotations;
-
+	TArray<FRotator> GoalRotations;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPoseableMeshComponent* PoseableMesh;
 	TArray<float> HistoryCondInputData;
-	TArray<float> RootFullInputData;
-	
-
 	float rootYaw = 0;
 	FVector CurrentRootPos;
 };
-

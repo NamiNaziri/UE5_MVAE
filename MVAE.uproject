@@ -43,6 +43,10 @@
 				"Linux",
 				"Mac"
 			]
+		},
+		{
+			"Name": "SkeletalMeshModelingTools",
+			"Enabled": true
 		}
 	]
 }

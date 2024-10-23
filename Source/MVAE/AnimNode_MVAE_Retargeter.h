@@ -17,7 +17,7 @@ struct FBonesRotations
 	GENERATED_BODY()
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BoneRotations")
-	TArray<FRotator> NewLocalRotations;
+	TArray<FQuat> NewLocalRotations;
 };
 
 

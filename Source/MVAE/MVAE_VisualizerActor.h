@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/PoseableMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "MVAE_VisualizerActor.generated.h"
 
@@ -30,13 +31,19 @@ public:
 	TArray<AActor*> SphereActors;
 
 	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<AActor> ActorToSpawn;
+	TSubclassOf<AActor> ActorToSpawn;
 
 	UPROPERTY(EditAnywhere)
-		TObjectPtr<class UNNEModelData> PreLoadedModelData;
+	TObjectPtr<class UNNEModelData> PreLoadedModelData;
 
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FVector> GoalPositions;
 
-		TArray<float> HistoryCondInputData;
-		float rootYaw = 0;
-		FVector CurrentRootPos;
+	UPROPERTY(BlueprintReadWrite)
+	TArray<FRotator> GoalRotations;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPoseableMeshComponent* PoseableMesh;
+	TArray<float> HistoryCondInputData;
+	float rootYaw = 0;
+	FVector CurrentRootPos;
 };

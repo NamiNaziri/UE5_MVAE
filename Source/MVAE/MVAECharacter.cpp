@@ -58,10 +58,35 @@ AMVAECharacter::AMVAECharacter(const FObjectInitializer& ObjectInitializer)
     FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
     FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+    Permutations = {
+    {0, 1, 2},
+    {0, 2, 1},
+    {1, 0, 2},
+    {1, 2, 0},
+    {2, 0, 1},
+    {2, 1, 0}
+    };
+
+    // Define sign combinations
+    SignCombinations = {
+        {1, 1, 1},
+        {-1, 1, 1},
+        {1, -1, 1},
+        {1, 1, -1},
+        {-1, -1, 1},
+        {-1, 1, -1},
+        {1, -1, -1},
+        {-1, -1, -1}
+    };
+    PermutationIndex = 3;
+    SignIndex = 3;
     // Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
     // are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
+/**
+ * 
+ */
 void AMVAECharacter::BeginPlay()
 {
     // Call the base class  
@@ -168,7 +193,7 @@ void AMVAECharacter::BeginPlay()
 
                         FRotator CurrentRotation = GetActorRotation();
                         CurrentRotation.Yaw = CurrentRotation.Yaw + FMath::RadiansToDegrees(OutputData[2]) * 0.03333333333;
-                        SetActorRotation(CurrentRotation);
+                        //SetActorRotation(CurrentRotation);
 
                         //UE_LOG(LogClass, Log, TEXT("Names: %f"), rootYaw);
                         FVector Speed(OutputData[0], OutputData[1], 0);
@@ -177,7 +202,7 @@ void AMVAECharacter::BeginPlay()
 
                         ActorLocation.X += Speed[0] * 0.03333333333 * 100;
                         ActorLocation.Y += Speed[1] * 0.03333333333 * 100;
-                        SetActorLocation(ActorLocation);
+                        //SetActorLocation(ActorLocation);
                         ActorLocation.Z = 0;
                         for (int i = 141; i < 213; i += 3)
                         {
@@ -215,21 +240,24 @@ void AMVAECharacter::BeginPlay()
 	                        {22,TEXT("RightHand")},
 	                        {-1, TEXT("hh2")},
                         };
-                        TArray<FQuat> ComponentRotation;
+                        //TArray<FQuat> ComponentRotation;
                         
                         TArray<int32> ParentIndices = { -1, 0, 1, 2, 3, 0, 5, 6, 7, 0, 9, 10, 11, 12, 11, 14, 15, 16,
                                 17, 11, 19, 20, 21, 22 };
-                        FVector RootRotationVector((OutputData[3]), (OutputData[4]), (OutputData[5]));
+                      /*  FVector RootRotationVector((OutputData[3]), (OutputData[4]), (OutputData[5]));
                         float RootAngle = RootRotationVector.Size();
                         FVector RootAxis = RootRotationVector.GetSafeNormal();
-                        FQuat RootQuat(RootAxis, RootAngle);
-                        ComponentRotation.Add(FQuat(FRotator(0,0,0)));
-                        GoalRotations[0] = RootQuat.Rotator();
+                        FQuat RootQuat(RootAxis, RootAngle);*/
+                        //ComponentRotation.Add(FQuat(FRotator(0,0,0)));
+                        //GoalRotations[0] = RootQuat.Rotator();
                         //PoseableMesh->BoneSpaceTransforms[0].SetRotation(FQuat(-RootQuat.Z, RootQuat.Y, -RootQuat.X, RootQuat.W));
                         //PoseableMesh->SetBoneRotationByName("Hips", RootQuat.Rotator(), EBoneSpaces::ComponentSpace);
                         
                         PoseableMesh->SetBoneLocationByName("Hips", GetActorLocation(), EBoneSpaces::WorldSpace);
-                        
+
+                        const TArray<int32>& Perm = Permutations[3];
+                        const FVector& Sign = SignCombinations[5];
+
                         for (int i = 3; i < 72; i += 3)
                         {
                             
@@ -239,27 +267,44 @@ void AMVAECharacter::BeginPlay()
 	                        float Angle = RotationVector.Size();  // This gives the magnitude (angle in radians)
 	                        FVector Axis = RotationVector.GetSafeNormal();  // Normalizes the vector to get the axis
 	                        FQuat PoseQuat = FQuat(Axis, Angle);
+                            TArray<double> Values{ PoseQuat.X, PoseQuat.Y, PoseQuat.Z };
+                            FVector PermutedValues(
+                                Values[Perm[0]] * Sign.X,
+                                Values[Perm[1]] * Sign.Y,
+                                Values[Perm[2]] * Sign.Z
+                            );
+                            FQuat NewQuat(PermutedValues.X, PermutedValues.Y, PermutedValues.Z, 1.0f);
+                            UE_LOG(LogClass, Log, TEXT("p: %i, s: %i"), PermutationIndex, SignIndex);
+                            counter++;
+                            if(counter >= 3000)
+                            {
+                                counter = 0;
+                                AdvanceIndices();
+                            }
+                            
 	                        int32 index = int32((i - 3) / 3) + 1;
+                            //UE_LOG(LogClass, Log, TEXT("Index: %i"), index);
+
 	                        PoseQuat.Normalize(); 
-                           int32 ParentIndex = ParentIndices[index];
-                           FQuat BoneRotation = ComponentRotation[ParentIndex] * PoseQuat;
-                           ComponentRotation.Add(BoneRotation);
+                           //int32 ParentIndex = ParentIndices[index];
+                           //FQuat BoneRotation = ComponentRotation[ParentIndex] * NewQuat;
+                           //ComponentRotation.Add(BoneRotation);
                            if (MixamoBodyPartMap.Contains(index)) 
                            {
                                //PoseableMesh->SetBoneRotationByName(MixamoBodyPartMap[index], BoneRotation.Rotator(), EBoneSpaces::WorldSpace);
                                //PoseableMesh->SetBoneRotationByName(MixamoBodyPartMap[index], FRotator(0,0,0), EBoneSpaces::ComponentSpace);
-                               FQuat NewQuat(-PoseQuat.Z, PoseQuat.Y, -PoseQuat.X, PoseQuat.W);
-                               const FTransform refTransform = PoseableMesh->GetSkinnedAsset()->GetRefSkeleton().GetRefBonePose()[PoseableMesh->GetBoneIndex(MixamoBodyPartMap[index])];
-                               FQuat temp = refTransform.GetRotation();
+                               
+                          /*     const FTransform refTransform = PoseableMesh->GetSkinnedAsset()->GetRefSkeleton().GetRefBonePose()[PoseableMesh->GetBoneIndex(MixamoBodyPartMap[index])];
+                               FQuat temp = refTransform.GetRotation();*/
                                
                                //PoseableMesh->BoneSpaceTransforms[PoseableMesh->GetBoneIndex(MixamoBodyPartMap[index])] = refTransform;
                                //PoseableMesh->SetBoneTransformByName(MixamoBodyPartMap[index], refTransform, EBoneSpaces::ComponentSpace);
-								//PoseableMesh->SetBoneRotationByName(MixamoBodyPartMap[index], NewQuat.Rotator(), EBoneSpaces::ComponentSpace);
-                               PoseableMesh->BoneSpaceTransforms[PoseableMesh->GetBoneIndex(MixamoBodyPartMap[index])].SetRotation(NewQuat);
-                               UE_LOG(LogClass, Log, TEXT("Names: %s, Rotation: %s"), *MixamoBodyPartMap[index].ToString(), *NewQuat.Rotator().ToString());
+                           	   PoseableMesh->SetBoneRotationByName(MixamoBodyPartMap[index], NewQuat.Rotator(), EBoneSpaces::ComponentSpace);
+                               //PoseableMesh->BoneSpaceTransforms[PoseableMesh->GetBoneIndex(MixamoBodyPartMap[index])].SetRotation(NewQuat);
+                               //UE_LOG(LogClass, Log, TEXT("Names: %s, Rotation: %s"), *MixamoBodyPartMap[index].ToString(), *NewQuat.Rotator().ToString());
                            }
 
-                            GoalRotations[int32((i - 3) / 3) + 1] = PoseQuat.Rotator();
+                            GoalRotations[int32((i - 3) / 3) + 1] = NewQuat.Rotator();
                         }
 
                     }

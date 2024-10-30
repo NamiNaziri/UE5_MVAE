@@ -94,4 +94,27 @@ public:
 	TArray<float> HistoryCondInputData;
 	float rootYaw = 0;
 	FVector CurrentRootPos;
+
+
+	TArray<TArray<int32>> Permutations;
+	TArray<FVector> SignCombinations;
+	int32 PermutationIndex;
+	int32 SignIndex;
+
+	int counter = 0;
+
+	void AdvanceIndices()
+	{
+		SignIndex++;
+		if (SignIndex >= SignCombinations.Num())
+		{
+			SignIndex = 0;
+			PermutationIndex++;
+
+			if (PermutationIndex >= Permutations.Num())
+			{
+				PermutationIndex = 0;  // Reset to the beginning when all combinations are used
+			}
+		}
+	}
 };

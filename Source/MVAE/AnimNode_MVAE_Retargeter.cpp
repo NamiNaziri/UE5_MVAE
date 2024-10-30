@@ -114,6 +114,7 @@ void FAnimNode_MVAE_Retargeter::Evaluate_AnyThread(FPoseContext& Output)
 		if(MixamoBodyPartMap.Contains(BoneName.ToString()))
 		{
 			FCompactPoseBoneIndex CompactBoneIdx = BoneContainer.GetCompactPoseIndexFromSkeletonIndex(idx);
+			
 			FTransform& LocalBonePose = Output.Pose[FCompactPoseBoneIndex(idx)];
 			LocalBonePose = RefTransform[idx];
 			//TODO get this based on the num of the bone
@@ -125,8 +126,9 @@ void FAnimNode_MVAE_Retargeter::Evaluate_AnyThread(FPoseContext& Output)
 			const FQuat BoneQuat(BoneRotator);
 			
 			const FQuat BaseQuat(RefTransform[idx].GetRotation());
-			//UE_LOG(LogClass, Log, TEXT("%s"), *(BaseQuat.ToString()));
-			LocalBonePose.SetRotation(BoneQuat);
+
+			UE_LOG(LogClass, Log, TEXT("%i-%i-%s: %s : %s : %s"), CompactBoneIdx.GetInt() , idx,*(BoneName.ToString()), *(BoneQuat.ToString()), *BaseQuat.ToString(), *(BoneQuat*BaseQuat).ToString());
+			LocalBonePose.SetRotation( BoneQuat* BaseQuat);
 			// TODO remove the * 0
 		}
 
